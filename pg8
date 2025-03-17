@@ -1,0 +1,28 @@
+import pandas as pd  
+import numpy as np  
+import seaborn as sns  
+import matplotlib.pyplot as plt  
+
+# Sample dataset with missing values & outliers  
+df = pd.DataFrame({"Age": [25, 30, 35, np.nan, 45, 120, 50, 28, np.nan, 32, 200],  
+                   "Salary": [30000, 40000, np.nan, 50000, 60000, 70000, np.nan, 80000, 100000, 150000, 500000]})  
+print(df)
+
+# Fill missing values with median  
+df.fillna(df.median(), inplace=True)  
+
+# Function to remove outliers using IQR  
+def remove_outliers(df, col):  
+    Q1, Q3 = df[col].quantile([0.25, 0.75])  
+    IQR = Q3 - Q1  
+    return df[(df[col] >= Q1 - 1.5 * IQR) & (df[col] <= Q3 + 1.5 * IQR)]  
+
+# Remove outliers  
+df = remove_outliers(df, "Age")  
+df = remove_outliers(df, "Salary")
+print(df)
+
+# Box plot after cleaning  
+sns.boxplot(data=df)  
+plt.title("Box Plot After Cleaning")  
+plt.show()
