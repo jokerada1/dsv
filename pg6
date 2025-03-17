@@ -1,0 +1,15 @@
+import matplotlib.pyplot as plt
+from pywaffle import Waffle
+
+# Data for categories
+data = {'A': 40, 'B': 30, 'C': 20, 'D': 10}
+
+# Waffle Chart
+plt.figure(
+    FigureClass=Waffle, rows=5, values=data,
+    colors=["blue", "red", "orange", "green"],
+    title={'label': "Product Sales Distribution", 'loc': 'center'},
+    legend={'loc': 'upper left', 'bbox_to_anchor': (1, 1)}
+)
+
+plt.show()
