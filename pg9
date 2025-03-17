@@ -1,0 +1,20 @@
+import pandas as pd  
+from sklearn.preprocessing import MinMaxScaler, StandardScaler  
+
+# Sample dataset  
+df = pd.DataFrame({"Age": range(25, 75, 5),  
+                   "Salary": range(30000, 130000, 10000),  
+                   "Experience": range(1, 20, 2)})  
+
+# Feature Engineering  
+df["Salary_per_Experience"] = df["Salary"] / df["Experience"]  
+
+# Scaling  
+scalers = {"Standardized": StandardScaler(), "MinMax": MinMaxScaler()}  
+scaled_dfs = {name: pd.DataFrame(scaler.fit_transform(df.iloc[:, :-1]), columns=df.columns[:-1])  
+              for name, scaler in scalers.items()}  
+
+# Display Results  
+print("\nOriginal Dataset:\n", df)  
+print("\nStandardized Data:\n", scaled_dfs["Standardized"])  
+print("\nMin-Max Normalized Data:\n", scaled_dfs["MinMax"])  
