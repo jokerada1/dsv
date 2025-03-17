@@ -1,0 +1,13 @@
+import seaborn as sns  
+import matplotlib.pyplot as plt  
+
+study_hours = list(range(1, 11))  # Convert range to list  
+exam_scores = [50, 55, 60, 65, 70, 75, 80, 85, 90, 95]  
+
+sns.regplot(x=study_hours, y=exam_scores, scatter_kws={'color': 'blue'}, line_kws={'color': 'red'})  
+plt.title("Study Hours vs Exam Scores")  
+plt.show()  
+
+sns.histplot(exam_scores, kde=True, bins=5, color="purple")  
+plt.title("Distribution of Exam Scores")  
+plt.show()
